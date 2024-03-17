@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "796164894137",
+    "project_id": "auto-quiz-7cb3b",
+    "storage_bucket": "auto-quiz-7cb3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796164894137:android:6b6b6e6adf8dbda157da68",
+        "android_client_info": {
+          "package_name": "com.example.autoquiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvgch6-fP9j4QwnXsCnygWrReCF86Ufhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
