@@ -3,7 +3,9 @@ package com.example.autoquiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -65,7 +67,9 @@ public class Quiz extends AppCompatActivity {
     }
 
     private void gameOver(){
-
+        Intent intent = new Intent(Quiz.this, EndQuiz.class);
+        startActivity(intent);
+        finish();
     }
     private boolean checkLives()
     {
@@ -85,6 +89,23 @@ public class Quiz extends AppCompatActivity {
         Score = findViewById(R.id.points);
         Lives = findViewById(R.id.lives);
         nextQuestion();
+
+        CountDownTimer start = new CountDownTimer(60000, 1000) {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTick(long l) {
+                Time.setText("0:" + l / 1000);
+                if ((l / 1000) < 10) Time.setText("0:0" + l / 1000);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent1 = new Intent(Quiz.this, EndQuiz.class);
+                startActivity(intent1);
+                finish();
+            }
+        }.start();
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override

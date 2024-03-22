@@ -45,6 +45,7 @@
 
 
         <Button
+            android:id="@+id/game1"
             android:layout_width="320dp"
             android:layout_height="80dp"
             android:text="Gago"
@@ -53,6 +54,7 @@
 
 
         <Button
+            android:id="@+id/game2"
             android:layout_width="320dp"
             android:layout_height="80dp"
             android:layout_marginTop="30dp"
