@@ -1,5 +1,5 @@
 package com.example.autoquiz;
-
+import org.json.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -16,22 +16,186 @@ import java.util.Random;
 
 public class Quiz extends AppCompatActivity {
 
-    String[] questions = new String[20];
-    String[][] answers = new String[20][5];
-    int[] numbers = new int[10];
+    String[] questions = {
+            "Какой производитель автомобилей выпускает 370Z?",
+            "Какой автомобильный бренд создал модель Model X, электрический кроссовер?",
+            "Как называется компания, выпускающая электромобили, основанная Илоном Маском?",
+            "Какой производитель автомобилей производит модели Focus и Fiesta?",
+            "Как называется место, где проходят гонки автомобилей по бездорожью?",
+            "Какая страна является крупнейшим производителем автомобилей?",
+            "Какая страна производит автомобили под маркой Nissan?",
+            "Какой тип кузова имеет автомобиль Porsche 911?",
+            "Какой автомобильный бренд производит модель Range Rover?",
+            "Какой тип кузова имеет автомобиль Ford Explorer?",
+            "Какая компания производит автомобили с логотипом трезубца?",
+            "Как называется режим, в котором автомобиль использует электродвигатель и двигатель внутреннего сгорания одновременно?",
+            "Что означает аббревиатура \"RPM\"?",
+            "Как называется концепция автомобильного двигателя, при которой цилиндры расположены в ряд?",
+            "Кто является основателем компании Ford?",
+            "Какая компания производит модели X5 и 3 Series?",
+            "Какая трасса является домашней для команды Red Bull Racing?",
+            "Как называется самая известная гонка Формулы-1, которая проходит ежегодно в Монако?",
+            "Какая компания является основным спонсором команды Red Bull Racing?",
+            "Как называется основной гонщик команды Red Bull Racing в настоящее время?"
+    };
+    String[][] answers = {
+            {       "Honda",
+                    "Subaru",
+                    "Nissan",
+                    "Toyota",
+                    "Nissan",
+            },
+            {
+                    "Tesla",
+                    "Nissan",
+                    "Chevrolet",
+                    "Audi",
+                    "Tesla",
+            },
+            {
+                    "Nissan",
+                    "Chevrolet",
+                    "Ford",
+                    "Tesla",
+                    "Tesla",
+            },
+            {
+                    "Toyota",
+                    "Honda",
+                    "Ford",
+                    "Chevrolet",
+                    "Ford",
+            },
+            {
+                    "Драг-рейсинг (Drag Racing)",
+                    "Ралли (Rally)",
+                    "Кольцевая трасса (Circuit Racing)",
+                    "Дрифт (Drifting)",
+                    "Ралли (Rally)",
+            },
+            {
+                    "Китай",
+                    "США",
+                    "Япония",
+                    "Германия",
+                    "Китай",
+            },
+            {
+                    "Япония",
+                    "США",
+                    "Корея",
+                    "Китай",
+                    "Япония",
+            },
+            {
+
+                    "Кабриолет",
+                    "Родстер",
+                    "Купе",
+                    "Тарга",
+                    "Купе",
+            },
+            {
+
+                    "Jeep",
+                    "Land Rover",
+                    "Toyota",
+                    "Subaru",
+                    "Land Rover",
+            },
+            {
+                    "Кроссовер",
+                    "Внедорожник",
+                    "Универсал",
+                    "Пикап",
+                    "Внедорожник",
+            },
+            {
+                    "Maserati",
+                    "Lamborghini",
+                    "Ferrari",
+                    "Alfa Romeo",
+                    "Maserati",
+            },
+            {
+                    "Hybrid Mode",
+                    "Electric Mode",
+                    "Eco Mode",
+                    "Power Mode",
+                    "Hybrid Mode",
+            },
+            {
+                    "Rotations Per Mile",
+                    "Revolutions Per Meter",
+                    "Rounds Per Minute",
+                    "Revolutions Per Minute",
+                    "Revolutions Per Minute",
+            },
+            {
+                    "V-образный",
+                    "Рядный",
+                    "W-образный",
+                    "Роторный",
+                    "Рядный",
+            },
+            {
+                    "Henry Ford",
+                    "William Ford",
+                    "John Ford",
+                    "Thomas Ford",
+                    "Henry Ford",
+            },
+            {
+                    "Audi",
+                    "Mercedes-Benz",
+                    "BMW",
+                    "Volvo",
+                    "BMW",
+            },
+            {
+                    "Autodromo Nazionale Monza",
+                    "Circuit de Monaco",
+                    "Silverstone Circuit",
+                    "Red Bull Ring",
+                    "Red Bull Ring",
+            },
+            {
+                    "Гран При Бельгии",
+                    "Гран При Австралии",
+                    "Гран При Монако",
+                    "Гран При Сингапура",
+                    "Гран При Монако",
+            },
+            {
+                    "Mercedes-Benz",
+                    "Red Bull GmbH",
+                    "Ferrari",
+                    "Aston Martin",
+                    "Red Bull GmbH",
+            },
+            {
+                    "Sebastian Vettel",
+                    "Max Verstappen",
+                    "Lewis Hamilton",
+                    "Fernando Alonso",
+                    "Max Verstappen",
+            }
+    };
+    int[] numbers = new int[20];
     private void addNumber(int a){
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 20; ++i) {
             if(numbers[i] == -1){
                 numbers[i] = a;
+                break;
             }
         }
     }
     private boolean checkNumber(int a){
         for (int i: numbers) {
             if(i == a){
-                return true;
+                return false;
             }
-        }return false;
+        }return true;
 
     }
 
@@ -40,7 +204,8 @@ public class Quiz extends AppCompatActivity {
     Button btn1, btn2, btn3, btn4;
     String ans;
 
-    TextView Score, Lives, Time;
+    TextView point, live, time;
+    CountDownTimer start;
 
 
     int points = 0;
@@ -52,22 +217,26 @@ public class Quiz extends AppCompatActivity {
         btn3.setText(answers[a][2]);
         btn4.setText(answers[a][3]);
         ans = answers[a][4];
-        Score.setText(points);
-        Lives.setText(lives);
+        point.setText(String.valueOf(points));
+        live.setText(String.valueOf(lives));
 
     }
 
     private void nextQuestion(){
         Random random = new Random();
         int a = random.nextInt(20);
-        if (!checkNumber(a)){
+        if (checkNumber(a)){
             addNumber(a);
             changeQuestion(a);
+        }else{
+            nextQuestion();
         }
     }
 
     private void gameOver(){
+        start.cancel();
         Intent intent = new Intent(Quiz.this, EndQuiz.class);
+        intent.putExtra("score", points);
         startActivity(intent);
         finish();
     }
@@ -86,17 +255,18 @@ public class Quiz extends AppCompatActivity {
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
         btn4 = findViewById(R.id.btn4);
-        Score = findViewById(R.id.points);
-        Lives = findViewById(R.id.lives);
+        point = findViewById(R.id.points123);
+        live = findViewById(R.id.lives123);
+        time = findViewById(R.id.time123);
         nextQuestion();
 
-        CountDownTimer start = new CountDownTimer(60000, 1000) {
+        start = new CountDownTimer(60000, 1000) {
 
             @SuppressLint("SetTextI18n")
             @Override
             public void onTick(long l) {
-                Time.setText("0:" + l / 1000);
-                if ((l / 1000) < 10) Time.setText("0:0" + l / 1000);
+                time.setText("0:" + l / 1000);
+                if ((l / 1000) < 10) time.setText("0:0" + l / 1000);
             }
 
             @Override
@@ -116,6 +286,7 @@ public class Quiz extends AppCompatActivity {
                     nextQuestion();
                 }else{
                     lives--;
+                    live.setText(String.valueOf(lives));
                 }
                 if(checkLives()){
                     gameOver();
@@ -131,6 +302,7 @@ public class Quiz extends AppCompatActivity {
                     nextQuestion();
                 }else{
                     lives--;
+                    live.setText(String.valueOf(lives));
                 }
                 if(checkLives()){
                     gameOver();
@@ -146,6 +318,7 @@ public class Quiz extends AppCompatActivity {
                     nextQuestion();
                 }else{
                     lives--;
+                    live.setText(String.valueOf(lives));
                 }
                 if(checkLives()){
                     gameOver();
@@ -161,11 +334,30 @@ public class Quiz extends AppCompatActivity {
                     nextQuestion();
                 }else{
                     lives--;
+                    live.setText(String.valueOf(lives));
                 }
                 if(checkLives()){
                     gameOver();
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        start.cancel();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+        start.cancel();
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStop() {
+        start.cancel();
+        super.onStop();
     }
 }
