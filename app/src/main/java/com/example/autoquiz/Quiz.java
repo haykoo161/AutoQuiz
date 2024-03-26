@@ -223,6 +223,10 @@ public class Quiz extends AppCompatActivity {
     }
 
     private void nextQuestion(){
+        if(points == 20){
+            gameOver();
+            return;
+        }
         Random random = new Random();
         int a = random.nextInt(20);
         if (checkNumber(a)){
@@ -271,9 +275,7 @@ public class Quiz extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent intent1 = new Intent(Quiz.this, EndQuiz.class);
-                startActivity(intent1);
-                finish();
+                gameOver();
             }
         }.start();
 
