@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bezhvi">#C39964</color>
     <color name="aqua">#008BCA</color>
+    <color name="blue">#0021DA</color>
+    <color name="green">#00FF0A</color>
+    <color name="red">#FF0000</color>
 </resources>

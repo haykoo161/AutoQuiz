@@ -1,15 +1,17 @@
 package com.example.autoquiz;
-import org.json.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -201,15 +203,18 @@ public class Quiz extends AppCompatActivity {
 
 
     TextView question;
-    Button btn1, btn2, btn3, btn4;
+    Button btn1, btn2, btn3, btn4, btn5;
     String ans;
 
     TextView point, live, time;
     CountDownTimer start;
 
 
+
     int points = 0;
     int lives = 2;
+    int isans1, isans2, isans3, isans4;
+
     private void changeQuestion(int a){
         question.setText(questions[a]);
         btn1.setText(answers[a][0]);
@@ -219,7 +224,6 @@ public class Quiz extends AppCompatActivity {
         ans = answers[a][4];
         point.setText(String.valueOf(points));
         live.setText(String.valueOf(lives));
-
     }
 
     private void nextQuestion(){
@@ -259,6 +263,7 @@ public class Quiz extends AppCompatActivity {
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
         btn4 = findViewById(R.id.btn4);
+        btn5 = findViewById(R.id.btn5);
         point = findViewById(R.id.points123);
         live = findViewById(R.id.lives123);
         time = findViewById(R.id.time123);
@@ -278,73 +283,125 @@ public class Quiz extends AppCompatActivity {
                 gameOver();
             }
         }.start();
-
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(btn1.getText().toString().equals(ans)){
-                    points++;
-                    nextQuestion();
-                }else{
-                    lives--;
-                    live.setText(String.valueOf(lives));
-                }
-                if(checkLives()){
-                    gameOver();
-                }
+                btn1.setBackgroundColor(Color.parseColor("#0021DA"));
+                btn2.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn3.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn4.setBackgroundColor(Color.parseColor("#008BCA"));
+                isans1 = 1;
+                isans2 = 0;
+                isans3 = 0;
+                isans4 = 0;
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(btn2.getText().toString().equals(ans)){
-                    points++;
-                    nextQuestion();
-                }else{
-                    lives--;
-                    live.setText(String.valueOf(lives));
-                }
-                if(checkLives()){
-                    gameOver();
-                }
+                btn2.setBackgroundColor(Color.parseColor("#0021DA"));
+                btn1.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn3.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn4.setBackgroundColor(Color.parseColor("#008BCA"));
+                isans1 = 0;
+                isans2 = 1;
+                isans3 = 0;
+                isans4 = 0;
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(btn3.getText().toString().equals(ans)){
-                    points++;
-                    nextQuestion();
-                }else{
-                    lives--;
-                    live.setText(String.valueOf(lives));
-                }
-                if(checkLives()){
-                    gameOver();
-                }
+                btn3.setBackgroundColor(Color.parseColor("#0021DA"));
+                btn2.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn1.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn4.setBackgroundColor(Color.parseColor("#008BCA"));
+                isans1 = 0;
+                isans2 = 0;
+                isans3 = 1;
+                isans4 = 0;
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(btn4.getText().toString().equals(ans)){
-                    points++;
-                    nextQuestion();
-                }else{
-                    lives--;
-                    live.setText(String.valueOf(lives));
-                }
-                if(checkLives()){
-                    gameOver();
-                }
+                btn4.setBackgroundColor(Color.parseColor("#0021DA"));
+                btn2.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn3.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn1.setBackgroundColor(Color.parseColor("#008BCA"));
+                isans1 = 0;
+                isans2 = 0;
+                isans3 = 0;
+                isans4 = 1;
             }
         });
-    }
 
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isans1 == 1){
+                    if(btn1.getText().toString().equals(ans)){
+                        points++;
+                        nextQuestion();
+                    }
+                    else{
+                        lives--;
+                        live.setText(String.valueOf(lives));
+                        nextQuestion();
+                    }
+                    if(checkLives()){
+                        gameOver();
+                    }
+                }
+                if(isans2 == 1){
+                    if(btn2.getText().toString().equals(ans)){
+                        points++;
+                        nextQuestion();
+                    }
+                    else{
+                        lives--;
+                        live.setText(String.valueOf(lives));
+                        nextQuestion();
+                    }
+                    if(checkLives()){
+                        gameOver();
+                    }
+                }
+                if(isans3 == 1){
+                    if(btn3.getText().toString().equals(ans)){
+                        points++;
+                        nextQuestion();
+                    }
+                    else{
+                        lives--;
+                        live.setText(String.valueOf(lives));
+                        nextQuestion();
+                    }
+                    if(checkLives()){
+                        gameOver();
+                    }
+                }
+                if(isans4 == 1){
+                    if(btn4.getText().toString().equals(ans)){
+                        points++;
+                        nextQuestion();
+                    }
+                    else{
+                        lives--;
+                        live.setText(String.valueOf(lives));
+                        nextQuestion();
+                    }
+                    if(checkLives()){
+                        gameOver();
+                    }
+                }
+                btn1.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn2.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn3.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn4.setBackgroundColor(Color.parseColor("#008BCA"));
+            }
+    });
+}
     @Override
     protected void onDestroy() {
         start.cancel();
@@ -363,3 +420,4 @@ public class Quiz extends AppCompatActivity {
         super.onStop();
     }
 }
+
