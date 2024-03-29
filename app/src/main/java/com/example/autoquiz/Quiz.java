@@ -399,6 +399,10 @@ public class Quiz extends AppCompatActivity {
                 btn2.setBackgroundColor(Color.parseColor("#008BCA"));
                 btn3.setBackgroundColor(Color.parseColor("#008BCA"));
                 btn4.setBackgroundColor(Color.parseColor("#008BCA"));
+                isans1 = 0;
+                isans2 = 0;
+                isans3 = 0;
+                isans4 = 0;
             }
     });
 }
