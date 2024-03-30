@@ -10,7 +10,6 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.Arrays;
 import java.util.Random;
@@ -342,11 +341,27 @@ public class Quiz extends AppCompatActivity {
                 if(isans1 == 1){
                     if(btn1.getText().toString().equals(ans)){
                         points++;
+                        Handler handler = new Handler();
+                        Runnable x = new Runnable() {
+                            @Override
+                            public void run() {
+                                btn1.setBackgroundColor(Color.parseColor("#00FF0A"));
+                            }
+                        };
+                        handler.postDelayed(x, 1);
                         nextQuestion();
                     }
                     else{
                         lives--;
                         live.setText(String.valueOf(lives));
+                        Handler handler = new Handler();
+                        Runnable x = new Runnable() {
+                            @Override
+                            public void run() {
+                                btn1.setBackgroundColor(Color.parseColor("#FF0000"));
+                            }
+                        };
+                        handler.postDelayed(x, 1);
                         nextQuestion();
                     }
                     if(checkLives()){
@@ -356,11 +371,27 @@ public class Quiz extends AppCompatActivity {
                 if(isans2 == 1){
                     if(btn2.getText().toString().equals(ans)){
                         points++;
+                        Handler handler = new Handler();
+                        Runnable x = new Runnable() {
+                            @Override
+                            public void run() {
+                                btn2.setBackgroundColor(Color.parseColor("#00FF0A"));
+                            }
+                        };
+                        handler.postDelayed(x, 1);
                         nextQuestion();
                     }
                     else{
                         lives--;
                         live.setText(String.valueOf(lives));
+                        Handler handler = new Handler();
+                        Runnable x = new Runnable() {
+                            @Override
+                            public void run() {
+                                btn2.setBackgroundColor(Color.parseColor("#FF0000"));
+                            }
+                        };
+                        handler.postDelayed(x, 1);
                         nextQuestion();
                     }
                     if(checkLives()){
@@ -370,11 +401,27 @@ public class Quiz extends AppCompatActivity {
                 if(isans3 == 1){
                     if(btn3.getText().toString().equals(ans)){
                         points++;
+                        Handler handler = new Handler();
+                        Runnable x = new Runnable() {
+                            @Override
+                            public void run() {
+                                btn3.setBackgroundColor(Color.parseColor("#00FF0A"));
+                            }
+                        };
+                        handler.postDelayed(x, 1);
                         nextQuestion();
                     }
                     else{
                         lives--;
                         live.setText(String.valueOf(lives));
+                        Handler handler = new Handler();
+                        Runnable x = new Runnable() {
+                            @Override
+                            public void run() {
+                                btn3.setBackgroundColor(Color.parseColor("#FF0000"));
+                            }
+                        };
+                        handler.postDelayed(x, 1);
                         nextQuestion();
                     }
                     if(checkLives()){
@@ -384,11 +431,27 @@ public class Quiz extends AppCompatActivity {
                 if(isans4 == 1){
                     if(btn4.getText().toString().equals(ans)){
                         points++;
+                        Handler handler = new Handler();
+                        Runnable x = new Runnable() {
+                            @Override
+                            public void run() {
+                                btn4.setBackgroundColor(Color.parseColor("#00FF0A"));
+                            }
+                        };
+                        handler.postDelayed(x, 1);
                         nextQuestion();
                     }
                     else{
                         lives--;
                         live.setText(String.valueOf(lives));
+                        Handler handler = new Handler();
+                        Runnable x = new Runnable() {
+                            @Override
+                            public void run() {
+                                btn4.setBackgroundColor(Color.parseColor("#FF0000"));
+                            }
+                        };
+                        handler.postDelayed(x, 1);
                         nextQuestion();
                     }
                     if(checkLives()){
