@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -26,7 +28,7 @@ public class Quiz extends AppCompatActivity {
             "Какая страна является крупнейшим производителем автомобилей?",
             "Какая страна производит автомобили под маркой Nissan?",
             "Какой тип кузова имеет автомобиль Porsche 911?",
-            "Какой автомобильный бренд производит модель Range Rover?",
+             "Какой автомобильный бренд производит модель Range Rover?",
             "Какой тип кузова имеет автомобиль Ford Explorer?",
             "Какая компания производит автомобили с логотипом трезубца?",
             "Как называется режим, в котором автомобиль использует электродвигатель и двигатель внутреннего сгорания одновременно?",
@@ -191,6 +193,8 @@ public class Quiz extends AppCompatActivity {
             }
         }
     }
+
+
     private boolean checkNumber(int a){
         for (int i: numbers) {
             if(i == a){
@@ -247,6 +251,74 @@ public class Quiz extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    private void setAnsColor(){
+        if(btn1.getText().toString().equals(ans)){
+            setRAnsColor(btn1);
+        }
+        else if(btn2.getText().toString().equals(ans)){
+            setRAnsColor(btn2);
+        }
+        else if(btn3.getText().toString().equals(ans)){
+            setRAnsColor(btn3);
+        }
+        else if(btn4.getText().toString().equals(ans)){
+            setRAnsColor(btn4);
+        }
+    }
+
+    private void setRAnsColor(Button btn){
+        Handler handler1 = new Handler();
+        Runnable x1 = new Runnable() {
+            @Override
+            public void run() {
+                btn.setBackgroundColor(Color.parseColor("#00FF0A"));
+                btn1.setClickable(false);
+                btn2.setClickable(false);
+                btn3.setClickable(false);
+                btn4.setClickable(false);
+                btn5.setClickable(false);
+            }
+        };
+
+        handler1.post(x1);
+        Handler handler = new Handler();
+        Runnable x = new Runnable() {
+            @Override
+            public void run() {
+                btn.setBackgroundColor(Color.parseColor("#008BCA"));
+                btn1.setClickable(true);
+                btn2.setClickable(true);
+                btn3.setClickable(true);
+                btn4.setClickable(true);
+                btn5.setClickable(true);
+                nextQuestion();
+            }
+        };
+        handler.postDelayed(x, 1000);
+    }
+
+    private void setWAnsColor(Button btn){
+        Handler handler1 = new Handler();
+        Runnable x1 = new Runnable() {
+            @Override
+            public void run() {
+                btn.setBackgroundColor(Color.parseColor("#FF0000"));
+            }
+        };
+
+        handler1.post(x1);
+        Handler handler = new Handler();
+        Runnable x = new Runnable() {
+            @Override
+            public void run() {
+                btn.setBackgroundColor(Color.parseColor("#008BCA"));
+                nextQuestion();
+            }
+        };
+
+        handler.postDelayed(x, 1000);
+    }
+
     private boolean checkLives()
     {
         return lives == 0;
@@ -268,13 +340,26 @@ public class Quiz extends AppCompatActivity {
         time = findViewById(R.id.time123);
         nextQuestion();
 
-        start = new CountDownTimer(60000, 1000) {
+        start = new CountDownTimer(120000, 1000) {
 
             @SuppressLint("SetTextI18n")
             @Override
             public void onTick(long l) {
-                time.setText("0:" + l / 1000);
-                if ((l / 1000) < 10) time.setText("0:0" + l / 1000);
+                if (l > 60000) {
+                    int m = (int) (l / 60000);
+                    int s = (int) (l / 1000 - (l / 60000) * 60);
+                    if (s > 9) {
+                        time.setText(m + ":" + s);
+                    } else {
+                        time.setText(m + ":0" + s);
+                    }
+                } else if (l < 60000) {
+                    if (l > 10000) {
+                        time.setText("0:" + l / 1000);
+                    } else {
+                        time.setText("0:0" + l / 1000);
+                    }
+                }
             }
 
             @Override
@@ -341,28 +426,14 @@ public class Quiz extends AppCompatActivity {
                 if(isans1 == 1){
                     if(btn1.getText().toString().equals(ans)){
                         points++;
-                        Handler handler = new Handler();
-                        Runnable x = new Runnable() {
-                            @Override
-                            public void run() {
-                                btn1.setBackgroundColor(Color.parseColor("#00FF0A"));
-                            }
-                        };
-                        handler.postDelayed(x, 1);
-                        nextQuestion();
+                        setRAnsColor(btn1);
+
                     }
                     else{
                         lives--;
                         live.setText(String.valueOf(lives));
-                        Handler handler = new Handler();
-                        Runnable x = new Runnable() {
-                            @Override
-                            public void run() {
-                                btn1.setBackgroundColor(Color.parseColor("#FF0000"));
-                            }
-                        };
-                        handler.postDelayed(x, 1);
-                        nextQuestion();
+                        setWAnsColor(btn1);
+                        setAnsColor();
                     }
                     if(checkLives()){
                         gameOver();
@@ -371,27 +442,13 @@ public class Quiz extends AppCompatActivity {
                 if(isans2 == 1){
                     if(btn2.getText().toString().equals(ans)){
                         points++;
-                        Handler handler = new Handler();
-                        Runnable x = new Runnable() {
-                            @Override
-                            public void run() {
-                                btn2.setBackgroundColor(Color.parseColor("#00FF0A"));
-                            }
-                        };
-                        handler.postDelayed(x, 1);
-                        nextQuestion();
+                        setRAnsColor(btn2);
                     }
                     else{
                         lives--;
                         live.setText(String.valueOf(lives));
-                        Handler handler = new Handler();
-                        Runnable x = new Runnable() {
-                            @Override
-                            public void run() {
-                                btn2.setBackgroundColor(Color.parseColor("#FF0000"));
-                            }
-                        };
-                        handler.postDelayed(x, 1);
+                        setWAnsColor(btn2);
+                        setAnsColor();
                         nextQuestion();
                     }
                     if(checkLives()){
@@ -401,28 +458,13 @@ public class Quiz extends AppCompatActivity {
                 if(isans3 == 1){
                     if(btn3.getText().toString().equals(ans)){
                         points++;
-                        Handler handler = new Handler();
-                        Runnable x = new Runnable() {
-                            @Override
-                            public void run() {
-                                btn3.setBackgroundColor(Color.parseColor("#00FF0A"));
-                            }
-                        };
-                        handler.postDelayed(x, 1);
-                        nextQuestion();
+                        setRAnsColor(btn3);
                     }
                     else{
                         lives--;
                         live.setText(String.valueOf(lives));
-                        Handler handler = new Handler();
-                        Runnable x = new Runnable() {
-                            @Override
-                            public void run() {
-                                btn3.setBackgroundColor(Color.parseColor("#FF0000"));
-                            }
-                        };
-                        handler.postDelayed(x, 1);
-                        nextQuestion();
+                        setWAnsColor(btn3);
+                        setAnsColor();
                     }
                     if(checkLives()){
                         gameOver();
@@ -431,28 +473,13 @@ public class Quiz extends AppCompatActivity {
                 if(isans4 == 1){
                     if(btn4.getText().toString().equals(ans)){
                         points++;
-                        Handler handler = new Handler();
-                        Runnable x = new Runnable() {
-                            @Override
-                            public void run() {
-                                btn4.setBackgroundColor(Color.parseColor("#00FF0A"));
-                            }
-                        };
-                        handler.postDelayed(x, 1);
-                        nextQuestion();
+                        setRAnsColor(btn4);
                     }
                     else{
                         lives--;
                         live.setText(String.valueOf(lives));
-                        Handler handler = new Handler();
-                        Runnable x = new Runnable() {
-                            @Override
-                            public void run() {
-                                btn4.setBackgroundColor(Color.parseColor("#FF0000"));
-                            }
-                        };
-                        handler.postDelayed(x, 1);
-                        nextQuestion();
+                        setWAnsColor(btn4);
+                        setAnsColor();
                     }
                     if(checkLives()){
                         gameOver();
