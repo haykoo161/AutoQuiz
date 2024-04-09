@@ -28,7 +28,7 @@ public class Quiz extends AppCompatActivity {
             "Какая страна является крупнейшим производителем автомобилей?",
             "Какая страна производит автомобили под маркой Nissan?",
             "Какой тип кузова имеет автомобиль Porsche 911?",
-             "Какой автомобильный бренд производит модель Range Rover?",
+            "Какой автомобильный бренд производит модель Range Rover?",
             "Какой тип кузова имеет автомобиль Ford Explorer?",
             "Какая компания производит автомобили с логотипом трезубца?",
             "Как называется режим, в котором автомобиль использует электродвигатель и двигатель внутреннего сгорания одновременно?",
@@ -230,7 +230,7 @@ public class Quiz extends AppCompatActivity {
     }
 
     private void nextQuestion(){
-        if(points == 20){
+        if(points == 20 || ((points + lives) == 20 && lives == 1) ){
             gameOver();
             return;
         }
@@ -242,6 +242,7 @@ public class Quiz extends AppCompatActivity {
         }else{
             nextQuestion();
         }
+        return;
     }
 
     private void gameOver(){
@@ -312,7 +313,7 @@ public class Quiz extends AppCompatActivity {
             @Override
             public void run() {
                 btn.setBackgroundColor(Color.parseColor("#008BCA"));
-                nextQuestion();
+
             }
         };
 
@@ -449,7 +450,6 @@ public class Quiz extends AppCompatActivity {
                         live.setText(String.valueOf(lives));
                         setWAnsColor(btn2);
                         setAnsColor();
-                        nextQuestion();
                     }
                     if(checkLives()){
                         gameOver();
@@ -494,8 +494,8 @@ public class Quiz extends AppCompatActivity {
                 isans3 = 0;
                 isans4 = 0;
             }
-    });
-}
+        });
+    }
     @Override
     protected void onDestroy() {
         start.cancel();
@@ -514,4 +514,3 @@ public class Quiz extends AppCompatActivity {
         super.onStop();
     }
 }
-
