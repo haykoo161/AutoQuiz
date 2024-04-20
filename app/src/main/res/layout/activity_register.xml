@@ -53,7 +53,7 @@
         app:passwordToggleDrawable="@drawable/eye_password">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cofirm_password"
+            android:id="@+id/confirmpassword"
             android:hint="@string/confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -11,6 +11,11 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -49,12 +54,8 @@ public class Quiz extends AppCompatActivity {
                     "Nissan",
             },
             {
-                    "Tesla",
-                    "Nissan",
-                    "Chevrolet",
-                    "Audi",
-                    "Tesla",
-            },
+                    "Tesla", "Nissan", "Chevrolet","Audi",
+                    "Tesla",},
             {
                     "Nissan",
                     "Chevrolet",
@@ -68,9 +69,9 @@ public class Quiz extends AppCompatActivity {
                     "Ford",
                     "Chevrolet",
                     "Ford",
-            },
+           },
             {
-                    "Драг-рейсинг (Drag Racing)",
+                   "Драг-рейсинг (Drag Racing)",
                     "Ралли (Rally)",
                     "Кольцевая трасса (Circuit Racing)",
                     "Дрифт (Drifting)",
@@ -114,7 +115,7 @@ public class Quiz extends AppCompatActivity {
                     "Внедорожник",
             },
             {
-                    "Maserati",
+                   "Maserati",
                     "Lamborghini",
                     "Ferrari",
                     "Alfa Romeo",
@@ -125,7 +126,7 @@ public class Quiz extends AppCompatActivity {
                     "Electric Mode",
                     "Eco Mode",
                     "Power Mode",
-                    "Hybrid Mode",
+                   "Hybrid Mode",
             },
             {
                     "Rotations Per Mile",
@@ -146,8 +147,8 @@ public class Quiz extends AppCompatActivity {
                     "William Ford",
                     "John Ford",
                     "Thomas Ford",
-                    "Henry Ford",
-            },
+                   "Henry Ford",
+           },
             {
                     "Audi",
                     "Mercedes-Benz",
@@ -161,7 +162,7 @@ public class Quiz extends AppCompatActivity {
                     "Silverstone Circuit",
                     "Red Bull Ring",
                     "Red Bull Ring",
-            },
+           },
             {
                     "Гран При Бельгии",
                     "Гран При Австралии",
@@ -211,6 +212,9 @@ public class Quiz extends AppCompatActivity {
 
     TextView point, live, time;
     CountDownTimer start;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+    FirebaseFirestore fStore;
 
 
 
@@ -339,6 +343,9 @@ public class Quiz extends AppCompatActivity {
         point = findViewById(R.id.points123);
         live = findViewById(R.id.lives123);
         time = findViewById(R.id.time123);
+        database = FirebaseDatabase.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        DocumentReference documentreference = fStore.collection("question").document("question1");
         nextQuestion();
 
         start = new CountDownTimer(120000, 1000) {

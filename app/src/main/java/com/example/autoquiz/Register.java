@@ -23,10 +23,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class Register extends AppCompatActivity {
 
 
-    TextInputEditText editTextEmail, editTextPassword;
+    TextInputEditText editTextEmail, editTextPassword, editTextConfirmPassword;
     Button buttonReg;
     FirebaseAuth mAuth;
-    ProgressBar progressBar;
     TextView textView;
 
     @Override
@@ -47,8 +46,8 @@ public class Register extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
+        editTextConfirmPassword = findViewById(R.id.confirmpassword);
         buttonReg = findViewById(R.id.btn_register);
-        progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.loginNow);
 
         textView.setOnClickListener(new View.OnClickListener() {
@@ -63,10 +62,10 @@ public class Register extends AppCompatActivity {
         buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                String email, password;
+                String email, password, confirmpassword;
                 email = String.valueOf(editTextEmail.getText());
                 password = String.valueOf(editTextPassword.getText());
+                confirmpassword = String.valueOf(editTextConfirmPassword.getText());
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(Register.this, "Enter email", Toast.LENGTH_SHORT).show();
@@ -77,12 +76,15 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(Register.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (password != confirmpassword) {
+                    Toast.makeText(Register.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     Toast.makeText(Register.this, "Account created",
                                             Toast.LENGTH_SHORT).show();
