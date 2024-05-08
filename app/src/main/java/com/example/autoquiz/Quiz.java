@@ -1,7 +1,6 @@
 package com.example.autoquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,178 +10,180 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.google.firebase.database.DatabaseReference;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import android.widget.Toast;
-
 import java.util.Arrays;
 import java.util.Random;
-
 
 public class Quiz extends AppCompatActivity {
 
     String[] questions = {
-            "Какой производитель автомобилей выпускает 370Z?",
-            "Какой автомобильный бренд создал модель Model X, электрический кроссовер?",
-            "Как называется компания, выпускающая электромобили, основанная Илоном Маском?",
-            "Какой производитель автомобилей производит модели Focus и Fiesta?",
-            "Как называется место, где проходят гонки автомобилей по бездорожью?",
-            "Какая страна является крупнейшим производителем автомобилей?",
-            "Какая страна производит автомобили под маркой Nissan?",
-            "Какой тип кузова имеет автомобиль Porsche 911?",
-            "Какой автомобильный бренд производит модель Range Rover?",
-            "Какой тип кузова имеет автомобиль Ford Explorer?",
-            "Какая компания производит автомобили с логотипом трезубца?",
-            "Как называется режим, в котором автомобиль использует электродвигатель и двигатель внутреннего сгорания одновременно?",
-            "Что означает аббревиатура \"RPM\"?",
-            "Как называется концепция автомобильного двигателя, при которой цилиндры расположены в ряд?",
-            "Кто является основателем компании Ford?",
-            "Какая компания производит модели X5 и 3 Series?",
-            "Какая трасса является домашней для команды Red Bull Racing?",
-            "Как называется самая известная гонка Формулы-1, которая проходит ежегодно в Монако?",
-            "Какая компания является основным спонсором команды Red Bull Racing?",
-            "Как называется основной гонщик команды Red Bull Racing в настоящее время?"
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
     };
     String[][] answers = {
-            {       "Honda",
-                    "Subaru",
-                    "Nissan",
-                    "Toyota",
-                    "Nissan",
+            {
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Tesla", "Nissan", "Chevrolet","Audi",
-                    "Tesla",},
-            {
-                    "Nissan",
-                    "Chevrolet",
-                    "Ford",
-                    "Tesla",
-                    "Tesla",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Toyota",
-                    "Honda",
-                    "Ford",
-                    "Chevrolet",
-                    "Ford",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+            },
+            {
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
            },
             {
-                   "Драг-рейсинг (Drag Racing)",
-                    "Ралли (Rally)",
-                    "Кольцевая трасса (Circuit Racing)",
-                    "Дрифт (Drifting)",
-                    "Ралли (Rally)",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Китай",
-                    "США",
-                    "Япония",
-                    "Германия",
-                    "Китай",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Япония",
-                    "США",
-                    "Корея",
-                    "Китай",
-                    "Япония",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
 
-                    "Кабриолет",
-                    "Родстер",
-                    "Купе",
-                    "Тарга",
-                    "Купе",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
 
-                    "Jeep",
-                    "Land Rover",
-                    "Toyota",
-                    "Subaru",
-                    "Land Rover",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Кроссовер",
-                    "Внедорожник",
-                    "Универсал",
-                    "Пикап",
-                    "Внедорожник",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                   "Maserati",
-                    "Lamborghini",
-                    "Ferrari",
-                    "Alfa Romeo",
-                    "Maserati",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Hybrid Mode",
-                    "Electric Mode",
-                    "Eco Mode",
-                    "Power Mode",
-                   "Hybrid Mode",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Rotations Per Mile",
-                    "Revolutions Per Meter",
-                    "Rounds Per Minute",
-                    "Revolutions Per Minute",
-                    "Revolutions Per Minute",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "V-образный",
-                    "Рядный",
-                    "W-образный",
-                    "Роторный",
-                    "Рядный",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Henry Ford",
-                    "William Ford",
-                    "John Ford",
-                    "Thomas Ford",
-                   "Henry Ford",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
            },
             {
-                    "Audi",
-                    "Mercedes-Benz",
-                    "BMW",
-                    "Volvo",
-                    "BMW",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Autodromo Nazionale Monza",
-                    "Circuit de Monaco",
-                    "Silverstone Circuit",
-                    "Red Bull Ring",
-                    "Red Bull Ring",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
            },
             {
-                    "Гран При Бельгии",
-                    "Гран При Австралии",
-                    "Гран При Монако",
-                    "Гран При Сингапура",
-                    "Гран При Монако",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Mercedes-Benz",
-                    "Red Bull GmbH",
-                    "Ferrari",
-                    "Aston Martin",
-                    "Red Bull GmbH",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             },
             {
-                    "Sebastian Vettel",
-                    "Max Verstappen",
-                    "Lewis Hamilton",
-                    "Fernando Alonso",
-                    "Max Verstappen",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
             }
     };
     int[] numbers = new int[20];
@@ -213,8 +214,9 @@ public class Quiz extends AppCompatActivity {
     TextView point, live, time;
     CountDownTimer start;
     FirebaseDatabase database;
-    DatabaseReference reference;
+
     FirebaseFirestore fStore;
+    FirebaseFirestore dbroot;
 
 
 
@@ -345,7 +347,8 @@ public class Quiz extends AppCompatActivity {
         time = findViewById(R.id.time123);
         database = FirebaseDatabase.getInstance();
         fStore = FirebaseFirestore.getInstance();
-        DocumentReference documentreference = fStore.collection("question").document("question1");
+        dbroot = FirebaseFirestore.getInstance();
+        fetchdata();
         nextQuestion();
 
         start = new CountDownTimer(120000, 1000) {
@@ -519,5 +522,307 @@ public class Quiz extends AppCompatActivity {
     protected void onStop() {
         start.cancel();
         super.onStop();
+    }
+    public void fetchdata(){
+        DocumentReference document = dbroot.collection("quiz1lvlquestions").document("question1");
+        document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[0] = documentSnapshot.getString("question");
+                    answers[0][0] = documentSnapshot.getString("a");
+                    answers[0][1] = documentSnapshot.getString("b");
+                    answers[0][2] = documentSnapshot.getString("c");
+                    answers[0][3] = documentSnapshot.getString("d");
+                    answers[0][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document1 = dbroot.collection("quiz1lvlquestions").document("question2");
+        document1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[1] = documentSnapshot.getString("question");
+                    answers[1][0] = documentSnapshot.getString("a");
+                    answers[1][1] = documentSnapshot.getString("b");
+                    answers[1][2] = documentSnapshot.getString("c");
+                    answers[1][3] = documentSnapshot.getString("d");
+                    answers[1][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document2 = dbroot.collection("quiz1lvlquestions").document("question3");
+        document2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[2] = documentSnapshot.getString("question");
+                    answers[2][0] = documentSnapshot.getString("a");
+                    answers[2][1] = documentSnapshot.getString("b");
+                    answers[2][2] = documentSnapshot.getString("c");
+                    answers[2][3] = documentSnapshot.getString("d");
+                    answers[2][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document3 = dbroot.collection("quiz1lvlquestions").document("question4");
+        document3.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[3] = documentSnapshot.getString("question");
+                    answers[3][0] = documentSnapshot.getString("a");
+                    answers[3][1] = documentSnapshot.getString("b");
+                    answers[3][2] = documentSnapshot.getString("c");
+                    answers[3][3] = documentSnapshot.getString("d");
+                    answers[3][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document4 = dbroot.collection("quiz1lvlquestions").document("question5");
+        document4.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[4] = documentSnapshot.getString("question");
+                    answers[4][0] = documentSnapshot.getString("a");
+                    answers[4][1] = documentSnapshot.getString("b");
+                    answers[4][2] = documentSnapshot.getString("c");
+                    answers[4][3] = documentSnapshot.getString("d");
+                    answers[4][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document5 = dbroot.collection("quiz1lvlquestions").document("question6");
+        document5.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[5] = documentSnapshot.getString("question");
+                    answers[5][0] = documentSnapshot.getString("a");
+                    answers[5][1] = documentSnapshot.getString("b");
+                    answers[5][2] = documentSnapshot.getString("c");
+                    answers[5][3] = documentSnapshot.getString("d");
+                    answers[5][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document6 = dbroot.collection("quiz1lvlquestions").document("question7");
+        document6.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[6] = documentSnapshot.getString("question");
+                    answers[6][0] = documentSnapshot.getString("a");
+                    answers[6][1] = documentSnapshot.getString("b");
+                    answers[6][2] = documentSnapshot.getString("c");
+                    answers[6][3] = documentSnapshot.getString("d");
+                    answers[6][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document7 = dbroot.collection("quiz1lvlquestions").document("question8");
+        document7.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[7] = documentSnapshot.getString("question");
+                    answers[7][0] = documentSnapshot.getString("a");
+                    answers[7][1] = documentSnapshot.getString("b");
+                    answers[7][2] = documentSnapshot.getString("c");
+                    answers[7][3] = documentSnapshot.getString("d");
+                    answers[7][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document8 = dbroot.collection("quiz1lvlquestions").document("question9");
+        document8.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[8] = documentSnapshot.getString("question");
+                    answers[8][0] = documentSnapshot.getString("a");
+                    answers[8][1] = documentSnapshot.getString("b");
+                    answers[8][2] = documentSnapshot.getString("c");
+                    answers[8][3] = documentSnapshot.getString("d");
+                    answers[8][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document9 = dbroot.collection("quiz1lvlquestions").document("question10");
+        document9.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[9] = documentSnapshot.getString("question");
+                    answers[9][0] = documentSnapshot.getString("a");
+                    answers[9][1] = documentSnapshot.getString("b");
+                    answers[9][2] = documentSnapshot.getString("c");
+                    answers[9][3] = documentSnapshot.getString("d");
+                    answers[9][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document10 = dbroot.collection("quiz1lvlquestions").document("question11");
+        document10.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[10] = documentSnapshot.getString("question");
+                    answers[10][0] = documentSnapshot.getString("a");
+                    answers[10][1] = documentSnapshot.getString("b");
+                    answers[10][2] = documentSnapshot.getString("c");
+                    answers[10][3] = documentSnapshot.getString("d");
+                    answers[10][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document11 = dbroot.collection("quiz1lvlquestions").document("question12");
+        document11.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[11] = documentSnapshot.getString("question");
+                    answers[11][0] = documentSnapshot.getString("a");
+                    answers[11][1] = documentSnapshot.getString("b");
+                    answers[11][2] = documentSnapshot.getString("c");
+                    answers[11][3] = documentSnapshot.getString("d");
+                    answers[11][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document12 = dbroot.collection("quiz1lvlquestions").document("question13");
+        document12.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[12] = documentSnapshot.getString("question");
+                    answers[12][0] = documentSnapshot.getString("a");
+                    answers[12][1] = documentSnapshot.getString("b");
+                    answers[12][2] = documentSnapshot.getString("c");
+                    answers[12][3] = documentSnapshot.getString("d");
+                    answers[12][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document13 = dbroot.collection("quiz1lvlquestions").document("question14");
+        document13.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[13] = documentSnapshot.getString("question");
+                    answers[13][0] = documentSnapshot.getString("a");
+                    answers[13][1] = documentSnapshot.getString("b");
+                    answers[13][2] = documentSnapshot.getString("c");
+                    answers[13][3] = documentSnapshot.getString("d");
+                    answers[13][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document14 = dbroot.collection("quiz1lvlquestions").document("question15");
+        document14.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[14] = documentSnapshot.getString("question");
+                    answers[14][0] = documentSnapshot.getString("a");
+                    answers[14][1] = documentSnapshot.getString("b");
+                    answers[14][2] = documentSnapshot.getString("c");
+                    answers[14][3] = documentSnapshot.getString("d");
+                    answers[14][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document15 = dbroot.collection("quiz1lvlquestions").document("question16");
+        document15.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[15] = documentSnapshot.getString("question");
+                    answers[15][0] = documentSnapshot.getString("a");
+                    answers[15][1] = documentSnapshot.getString("b");
+                    answers[15][2] = documentSnapshot.getString("c");
+                    answers[15][3] = documentSnapshot.getString("d");
+                    answers[15][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document16 = dbroot.collection("quiz1lvlquestions").document("question17");
+        document16.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[16] = documentSnapshot.getString("question");
+                    answers[16][0] = documentSnapshot.getString("a");
+                    answers[16][1] = documentSnapshot.getString("b");
+                    answers[16][2] = documentSnapshot.getString("c");
+                    answers[16][3] = documentSnapshot.getString("d");
+                    answers[16][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document17 = dbroot.collection("quiz1lvlquestions").document("question18");
+        document17.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[17] = documentSnapshot.getString("question");
+                    answers[17][0] = documentSnapshot.getString("a");
+                    answers[17][1] = documentSnapshot.getString("b");
+                    answers[17][2] = documentSnapshot.getString("c");
+                    answers[17][3] = documentSnapshot.getString("d");
+                    answers[17][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document18 = dbroot.collection("quiz1lvlquestions").document("question19");
+        document18.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[18] = documentSnapshot.getString("question");
+                    answers[18][0] = documentSnapshot.getString("a");
+                    answers[18][1] = documentSnapshot.getString("b");
+                    answers[18][2] = documentSnapshot.getString("c");
+                    answers[18][3] = documentSnapshot.getString("d");
+                    answers[18][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
+        DocumentReference document19 = dbroot.collection("quiz1lvlquestions").document("question20");
+        document19.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    questions[19] = documentSnapshot.getString("question");
+                    answers[19][0] = documentSnapshot.getString("a");
+                    answers[19][1] = documentSnapshot.getString("b");
+                    answers[19][2] = documentSnapshot.getString("c");
+                    answers[19][3] = documentSnapshot.getString("d");
+                    answers[19][4] = documentSnapshot.getString("answer");
+                }
+            }
+        });
     }
 }
