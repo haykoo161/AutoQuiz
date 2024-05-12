@@ -29,17 +29,6 @@ public class Register extends AppCompatActivity {
     TextView textView;
 
     @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), Hub.class);
-            startActivity(intent);
-            finish();
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -59,6 +48,12 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        if(mAuth.getCurrentUser() != null){
+            Intent intent = new Intent(getApplicationContext(), Hub.class);
+            startActivity(intent);
+            finish();
+        }
+
         buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,29 +66,28 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(Register.this, "Enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 if (TextUtils.isEmpty(password)) {
                     Toast.makeText(Register.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (password != confirmpassword) {
-                    Toast.makeText(Register.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
+                if(password.length() < 6){
+                    Toast.makeText(Register.this, "Password is too short", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                if(edit){
+//                    Toast.makeText(Register.this, "Passwords doesn't match", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(Register.this, "Account created",
-                                            Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this, "Account created", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), Hub.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(Register.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
 
                                 }
                             }
