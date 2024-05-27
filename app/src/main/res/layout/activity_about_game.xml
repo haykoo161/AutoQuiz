@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/main"
+android:layout_gravity="center"
+android:gravity="center"
+android:background="@drawable/gradient"
+tools:context=".AboutGame">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="299dp"
+            android:layout_height="617dp"
+            android:text="Первая мини-игра это Quiz. С помощью рандома в каждом режиме появляются 20 вопросову которых есть 4 варианта ответа (1 из 4-ех правильный). За каждый правильный ответ игрок получает одно очко а за неправильный ответ отнимается жизнь. Всего торыхжизней 3. Во второй мини-игре есть 2 картинки на ко разные машины и игроку нужно выбрать картинку с машиной у которой больше лошадиных сил. Механика полученных баллов такая же как и в предыдущей игре."
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+        <Button
+            android:id="@+id/backa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/orange"
+            android:text="Back"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
+    </LinearLayout>
+</RelativeLayout>

@@ -9,4 +9,5 @@
     <string name="click_to_register">Click to register</string>
     <string name="guest_mode">Guest Mode</string>
     <string name="nickname">Nickname</string>
+    <string name="passwordDoesntMatch">Passwords dont match</string>
 </resources>

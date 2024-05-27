@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/bezhvi"
+    android:background="@drawable/gradient"
     android:layout_height="match_parent"
     tools:context=".Game1"
     android:orientation="vertical">
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="5"
-        android:background="@color/aqua"
+        android:background="@color/gray"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/white"
+                android:textColor="@color/orange"
                 android:textSize="24sp"/>
             <TextView
                 android:text="Time"
@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/white"
+                android:textColor="@color/orange"
                 android:textSize="24sp"/>
             <TextView
                 android:text="Lives"
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/white"
+                android:textColor="@color/orange"
                 android:textSize="24sp"/>
         </LinearLayout>
         <LinearLayout
@@ -104,6 +104,7 @@
                 android:background="@drawable/round_corners"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:backgroundTint="@color/gray"
                 android:layout_weight="1"
                 android:textColor="@color/white" />
             <Space
@@ -130,10 +131,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="15"/>
-                <ImageView
+                <ImageButton
                     android:id="@+id/image1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:backgroundTint="@color/transp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
                     android:layout_weight="11"/>
                 <Space
                     android:layout_width="match_parent"
@@ -145,16 +149,20 @@
                     android:layout_weight="15"
                     android:text="~ИЛИ~"
                     android:textSize="24dp"
+                    android:textColor="@color/white"
                     android:gravity="center"/>
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="15"/>
-                <ImageView
+                <ImageButton
                     android:id="@+id/image2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="11"/>
+                    android:backgroundTint="@color/transp"
+                    android:layout_weight="11"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"/>
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

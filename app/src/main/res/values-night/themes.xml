@@ -3,6 +3,7 @@
     <style name="Base.Theme.AutoQuiz" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="colorPrimary">@color/aqua</item>
+        <item name="colorPrimaryDark">@color/orange</item>
+        <item name="android:navigationBarColor">@color/orange</item>
     </style>
 </resources>

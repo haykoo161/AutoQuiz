@@ -15,8 +15,13 @@
         android:theme="@style/Theme.AutoQuiz"
         tools:targetApi="31">
         <activity
+            android:name=".AboutGame"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Game1"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".EndQuiz"
             android:exported="false"
