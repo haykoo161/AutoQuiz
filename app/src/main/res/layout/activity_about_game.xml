@@ -25,11 +25,11 @@ tools:context=".AboutGame">
         android:orientation="vertical"
         android:padding="20dp">
         <TextView
-            android:layout_width="299dp"
-            android:layout_height="617dp"
+            android:layout_width="wrap_content"
+            android:layout_height="476dp"
             android:text="Первая мини-игра это Quiz. С помощью рандома в каждом режиме появляются 20 вопросову которых есть 4 варианта ответа (1 из 4-ех правильный). За каждый правильный ответ игрок получает одно очко а за неправильный ответ отнимается жизнь. Всего торыхжизней 3. Во второй мини-игре есть 2 картинки на ко разные машины и игроку нужно выбрать картинку с машиной у которой больше лошадиных сил. Механика полученных баллов такая же как и в предыдущей игре."
             android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:textSize="20sp"/>
         <Button
             android:id="@+id/backa"
             android:layout_width="wrap_content"
@@ -38,6 +38,6 @@ tools:context=".AboutGame">
             android:backgroundTint="@color/orange"
             android:text="Back"
             android:textColor="@color/white"
-            android:textSize="40sp" />
+            android:textSize="40sp"/>
     </LinearLayout>
 </RelativeLayout>

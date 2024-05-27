@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AutoQuiz</string>
+    <string name="app_name">Motor Mindset</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="confirm_password">Confirm Password</string>
